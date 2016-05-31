@@ -1,0 +1,148 @@
+
+		<div class="row">
+			<%= search_form_for @search, url: search_path do |f| %>
+
+				<div class="row">
+					<div class="col-md-3">
+						<%= text_field_tag :start_date, params[:start_date], placeholder: "Start Date", class: "form-control" %>
+					</div>
+					<div class="col-md-3">
+						<%= text_field_tag :end_date, params[:end_date], placeholder: "End Date", class: "form-control" %>
+					</div>
+					<div class="col-md-3">
+						<%= f.text_field :price_gteq, placeholder: "Min Price", class: "form-control" %>
+					</div>
+					<div class="col-md-3">
+						<%= f.text_field :price_lteq, placeholder: "Max Price", class: "form-control" %>
+					</div>
+				</div>
+
+				<hr>
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Listing Type</label>
+							<%= f.select :listing_type_gteq, [["Tour","Tour"], ["Activity","Activity"]], prompt: "Select...", class: "form-control" %>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Experience Type</label>
+							<%= f.select :experience_type_gteq, [["City/Histotical Tour","City/Histotical Tour"], ["Pub Tour","Pub Tour"], ["Craft Beer Tour","Craft Beer Tour"], ["Wineries Tour","Wineries Tour"],["Star Gazing","Star Gazing"], ["Mountain Bike","Mountain Bike"], ["Snowboarding","Snowboarding"], ["Skiing","Skiing"], ["Fitness","Fitness"], ["Yoga","Yoga"], ["Golf","Golf"], ["Surf","Surf"], ["Kayak","Kayak"], ["Paddle Board","Paddle Board"], ["Snorkeling","Snorkeling"]], prompt: "Select...", class: "form-control" %>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<div class="form-group">
+							<label>Expert Level</label>
+							<%= f.select :expert_level_gteq, [["1",1], ["2",2], ["3",3], ["4+",4]], prompt: "Select...", class: "form-control" %>
+						</div>
+					</div>
+				</div>
+
+				<hr>
+        <label>Extras</label>
+				<div class="row">
+					<div class="col-md-4">
+						<%= check_box_tag "q[is_car_eq]", true %> Car
+					</div>
+					<div class="col-md-4">
+						<%= check_box_tag "q[is_mtb_eq]", true %> Mountain Bike
+					</div>
+					<div class="col-md-4">
+						<%= check_box_tag "q[is_snb_eq]", true %> Snowboard
+					</div>
+					<div class="col-md-4">
+						<%= check_box_tag "q[is_ski_eq]", true %> Skis
+					</div>
+					<div class="col-md-4">
+						<%= check_box_tag "q[is_surf_eq]", true %> Surf Board
+					</div>
+          <div class="col-md-4">
+						<%= check_box_tag "q[is_kayak_eq]", true %> Kayak
+					</div>
+          <div class="col-md-4">
+						<%= check_box_tag "q[is_golf_eq]", true %> Golf Gear
+					</div>
+          <div class="col-md-4">
+						<%= check_box_tag "q[is_paddle_eq]", true %> Paddle Board
+					</div>
+          <div class="col-md-4">
+						<%= check_box_tag "q[is_fitness_eq]", true %> Fitness Gear
+					</div>
+          <div class="col-md-4">
+						<%= check_box_tag "q[is_yoga_eq]", true %> Yoga Gear
+					</div>
+          <div class="col-md-4">
+						<%= check_box_tag "q[is_snorkel_eq]", true %> Snorkel Gear
+					</div>
+          <div class="col-md-4">
+						<%= check_box_tag "q[is_star_eq]", true %> Stargazing Gear
+					</div>
+          <div class="col-md-4">
+						<%= check_box_tag "q[is_fish_eq]", true %> Fishing Gear
+					</div>
+          <div class="col-md-4">
+						<%= check_box_tag "q[is_hik_eq]", true %> Hinking Gear
+					</div>
+          <div class="col-md-4">
+						<%= check_box_tag "q[is_trek_eq]", true %> Trekking Gear
+					</div>
+				</div>
+
+				<br>
+        <hr>
+
+				<div class="row">
+					<%= f.submit "Search", class: "btn btn-primary" %>
+				</div>
+
+			<% end %>
+
+			<hr>
+
+			<div class="row">
+				<% @arrListings.each do |listing| %>
+
+					<div class="col-md-4">
+						<div class="panel panel-default">
+							<div class="panel-heading preview">
+								<%= image_tag listing.photos[0].image.url(:medium) if listing.photos.length > 0 %>
+							</div>
+							<div class="panel-body">
+								<%= link_to listing.listing_name, listing %>
+							</div>
+						</div>
+					</div>
+
+				<% end %>
+			</div>
+
+
+		</div>
+
+
+<script>
+	$(function() {
+		$("#start_date").datepicker({
+			dateFormat: 'dd-mm-yy',
+			minDate: 0,
+			maxDate: '3m',
+			onSelect: function(selected) {
+				$('#end_date').datepicker("option", "minDate", selected);
+				$('#end_date').attr('disabled', false);
+			}
+		});
+
+		$("#end_date").datepicker({
+			dateFormat: 'dd-mm-yy',
+			minDate: 0,
+			maxDate: '3m',
+			onSelect: function(selected) {
+				$('#start_date').datepicker("option", "maxDate", selected);
+			}
+		});
+	})
+</script>

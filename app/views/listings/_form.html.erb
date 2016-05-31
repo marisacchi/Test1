@@ -1,0 +1,174 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		Create your NatiVos Listing
+	</div>
+	<div class="panel-body">
+		<div class="container">
+
+			<%= simple_form_for @listing, :html => { multipart: true } do |f| %>
+
+				<div class="row">
+					<div class="col-md-4 select">
+						<div class="form-group">
+							<label>Listing Type</label>
+							<%= f.select :listing_type, [["Tour","Tour"], ["Activity","Activity"]], id: "listing_type",prompt: "Select...", class: "form-control" %>
+						</div>
+					</div>
+
+					<div class="col-md-4 select">
+						<div class="form-group">
+							<label>Experience Type</label>
+							<%= f.select :experience_type, [["City/Histotical Tour","City/Histotical Tour"], ["Pub Tour","Pub Tour"], ["Craft Beer Tour","Craft Beer Tour"], ["Wineries Tour","Wineries Tour"],["Star Gazing","Star Gazing"], ["Mountain Bike","Mountain Bike"], ["Snowboarding","Snowboarding"], ["Skiing","Skiing"], ["Fitness","Fitness"], ["Yoga","Yoga"], ["Golf","Golf"], ["Surf","Surf"], ["Kayak","Kayak"], ["Paddle Board","Paddle Board"], ["Snorkeling","Snorkeling"]],prompt: "Select...", class: "form-control" %>
+						</div>
+					</div>
+
+					<div class="col-md-4 select">
+						<div class="form-group">
+							<label>Accommodate</label>
+							<%= f.select :accommodate, [["1",1], ["2",2], ["3",3], ["4",4], ["5",5], ["6+",6]], prompt: "Select...", class: "form-control" %>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 select">
+						<div class="form-group">
+							<label>Expert Level</label>
+							<%= f.select :expert_level, [["1",1], ["2",2], ["3",3], ["4+",4]], prompt: "Select...", class: "form-control" %>
+						</div>
+					</div>
+
+					<div class="col-md-4 select">
+						<div class="form-group">
+							<label>Fitness Level</label>
+							<%= f.select :fitness_level, [["1",1], ["2",2], ["3",3], ["4+",4]], prompt: "Select...", class: "form-control" %>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<label>Listing name</label>
+						<%= f.text_field :listing_name, placeholder: "Be clear and descriptive", class: "form-control" %>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<label>Summary</label>
+						<%= f.text_area :summary, rows: 5, placeholder: "Tell about your listing", class: "form-control" %>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group">
+						<label>Address</label>
+						<%= f.text_field :street, placeholder: "Street", class: "form-control" %><br>
+            <%= f.text_field :suburb, placeholder: "Suburb", class: "form-control" %><br>
+            <%= f.text_field :city, placeholder: "City", class: "form-control" %><br>
+            <%= f.text_field :state, placeholder: "State", class: "form-control" %><br>
+            <%= f.text_field :post_code, placeholder: "Post Code", class: "form-control" %><br>
+            <%= f.country_select :country, priority_countries: ["AU", "US", "BR"], class: "form-control" %><br>
+					</div>
+				</div>
+				<br>
+				<label>Extras</label>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<%= f.check_box :is_car %> Car/Van
+						</div>
+						<div class="form-group">
+							<%= f.check_box :is_mtb %> Mountain Bike
+						</div>
+						<div class="form-group">
+							<%= f.check_box :is_snb %> Snowboard
+						</div>
+					</div>
+
+          <div class="row">
+  					<div class="col-md-3">
+  						<div class="form-group">
+  							<%= f.check_box :is_ski %> Skis
+  						</div>
+  						<div class="form-group">
+  							<%= f.check_box :is_golf %> Golf Clubs
+  						</div>
+  						<div class="form-group">
+  							<%= f.check_box :is_fitness %> Fitness Gear
+  						</div>
+  					</div>
+
+          <div class="row">
+  					<div class="col-md-3">
+  						<div class="form-group">
+  							<%= f.check_box :is_yoga %> Yoga Gear
+  						</div>
+  						<div class="form-group">
+  							<%= f.check_box :is_surf %> Surf Board
+  						</div>
+  						<div class="form-group">
+  							<%= f.check_box :is_kayak %> Kayak
+  						</div>
+  					</div>
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<%= f.check_box :is_paddle %> Paddle Board
+						</div>
+
+						<div class="form-group">
+							<%= f.check_box :is_snorkel %> Snorkeling Gear
+						</div>
+
+						<div class="form-group">
+							<%= f.check_box :is_star %> Star Gazing Gear
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+			<br>
+
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Price</label>
+							<div class="input-group">
+								<div class="input-group-addon">$</div>
+								<%= f.text_field :price, placeholder: "eg. $100", class: "form-control" %>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form-group">
+							<label>Pictures</label>
+							<span class="btn btn-default btn-file">
+							    <i class="fa fa-cloud-upload fa-lg"></i> Upload Photos
+							    <%= file_field_tag "images[]", type: :file, multiple: true, class: "form-control" %>
+							</span>
+						</div>
+					</div>
+				</div>
+
+				<div id="photos"><%= render 'photos/list' %></div>
+
+				<div class="row">
+					<div class="form-group">
+						<%= f.check_box :active %> Active
+					</div>
+				</div>
+
+				<div class="actions">
+					<%= f.submit "Save", class: "btn btn-primary" %>
+				</div>
+
+			<% end %>
+
+		</div>
+	</div>
+</div>

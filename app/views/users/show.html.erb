@@ -1,0 +1,89 @@
+<div class="row">
+	<div class="col-md-5">
+		<div class="center">
+
+			<% if current_user.image == @user %>
+			<div class="img-responsive">
+				<%= image_tag avatar_url(@user.current_user) %>
+			</div>
+			<% else %>
+				 <div class="img-responsive">
+					 <%= image_tag(@user.avatar.url) %>
+				 </div>
+			<% end %>
+
+
+			<% if current_user != @user %>
+				<div class="row-space-2">
+					<%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: 'post', class: "btn btn-primary wide" %>
+				</div>
+			<% end %>
+
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading"><%= @user.fullname %></div>
+			<div class="panel-body">
+			Email: <%= @user.email %><br>
+			<hr>
+			Phone Number: <%= @user.phone_number %><br>
+			<hr>
+	  	Date Of Birth:	<%= @user.dob %><br>
+			<hr>
+			Address: <%= @user.full_address %><br>
+			<hr>
+			Gender:	<%= @user.gender %><br>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<h2>A little bit about me</h2>
+
+		<div class="description row-space-3">
+			<%= @user.description %>
+		</div>
+		<h4>Listings (<%= @listings.length %>)</h4><br>
+
+		<div class="row">
+
+			<% @listings.each do |listing| %>
+				<div class="col-md-6">
+					<div class="panel panel-default">
+						<div class="panel2-heading preview">
+							<%= image_tag listing.photos[0].image.url(:medium) %>
+						</div>
+						<div class="panel-body">
+							<%= link_to listing.listing_name, listing %>
+						</div>
+					</div>
+				</div>
+			<% end %>
+	</div>
+<hr>
+	<h4>Reviews</h4><br>
+
+		<% @listings.each do |listing| %>
+			<% if !listing.reviews.blank? %>
+
+				<% listing.reviews.each do |review| %>
+					<div class="row">
+						<div class="col-md-2 text-center">
+							<%= link_to user_path(review.user) do %>
+							<%= image_tag avatar_url(review.user), class: "img-circle avatar-medium" %><br>
+							<% end %>
+							<%= review.user.fullname %>
+
+						</div>
+						<div class="col-md-10">
+							<%= link_to listing.listing_name, listing %><br>
+							<%= review.comment %><br>
+							<%= review.created_at.strftime("%v") %>
+						</div>
+					</div>
+				<% end %>
+
+			<% end %>
+		<% end %>
+
+	</div>
+</div>

@@ -1,0 +1,59 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  listing_type: MyString
+  experience_type: MyString
+  accommodate: 1
+  expert_level: 1
+  fitness_level: 1
+  listing_name: MyString
+  summary: MyText
+  street: MyString
+  suburb: MyString
+  city: MyString
+  state: MyString
+  post_code: MyString
+  country: MyString
+  is_car: false
+  is_mtb: false
+  is_snb: false
+  is_ski: false
+  is_surf: false
+  is_kayak: false
+  is_golf: false
+  is_paddle: false
+  is_fitness: false
+  is_yoga: false
+  is_snorkel: false
+  active: false
+  price: 1
+  user_id: 
+
+two:
+  listing_type: MyString
+  experience_type: MyString
+  accommodate: 1
+  expert_level: 1
+  fitness_level: 1
+  listing_name: MyString
+  summary: MyText
+  street: MyString
+  suburb: MyString
+  city: MyString
+  state: MyString
+  post_code: MyString
+  country: MyString
+  is_car: false
+  is_mtb: false
+  is_snb: false
+  is_ski: false
+  is_surf: false
+  is_kayak: false
+  is_golf: false
+  is_paddle: false
+  is_fitness: false
+  is_yoga: false
+  is_snorkel: false
+  active: false
+  price: 1
+  user_id: 
